@@ -1,0 +1,3 @@
+# Recursive_spike
+Used MPI and OpenMP to implement recursive spike algorithm to solve sparse banded linear matrix system
+The OpenMP is working but the MPI is still under construction...
