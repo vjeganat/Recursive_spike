@@ -1,0 +1,13 @@
+#!/bin/bash -l
+#SBATCH -N 1          # you'll never need more than 1 node for the openmp code
+#SBATCH -n 16
+#SBATCH -t 00:10:00   # adjust the amount of time as necessary
+#SBATCH -p gpu
+#SBATCH -A UH-COSC6374-18F-Para
+#SBATCH -J openmp16
+#SBATCH -o openmp16.%j.stdout
+
+
+export OMP_NUM_THREADS=16
+#export OMP_PLACES=cores
+./openmp -n 500 -o openmp.txt

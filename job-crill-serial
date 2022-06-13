@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#SBATCH -N 1          # you'll never need more than 1 node for the serial code
+#SBATCH -n 1
+#SBATCH -p gpu
+#SBATCH -A UH-COSC6374-18F-Para
+#SBATCH -t 00:10:00   # adjust the amount of time as necessary
+#SBATCH -J serial
+#SBATCH -o Serial.%j.stdout
+
+
+./serial -n 10000 -o serial.txt

@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#SBATCH -N 1         # adjust the number of nodes per test (e.g. start with 1, 2, ...)
+#SBATCH -n 8
+#SBATCH -t 00:10:00   # adjust the amount of time as necessary
+#SBATCH -p gpu
+#SBATCH -A UH-COSC6374-18F-Para
+#SBATCH -J mpi8
+#SBATCH -o mpi8.%j.stdout
+
+
+mpirun -n 8 ./mpi -n 500 -o mpi.txt  # adjust -n here as well

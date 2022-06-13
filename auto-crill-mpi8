@@ -1,0 +1,30 @@
+#!/bin/bash -l
+#SBATCH -N 8			  # adjust the number of nodes per test (e.g. start with 1, 2, ...)
+#SBATCH -n 16
+#SBATCH -t 00:20:00		  # adjust the amount of time as necessary
+#SBATCH -p gpu
+#SBATCH -A UH-COSC6374-18F-Para
+#SBATCH -J auto-mpi32
+#SBATCH -o Mpi32.%j.stdout
+
+
+# You will *need* to adjust the following runs to get
+# the chart you want. 
+
+
+rm mpi.txt
+# Strong scaling runs
+mpirun -n 1  ./serial -n 5000 -no -s mpi.txt
+mpirun -n 1  ./mpi -p 1 -n 5000 -no -s mpi.txt
+mpirun -n 2  ./mpi -p 2 -n 5000 -no -s mpi.txt
+mpirun -n 4  ./mpi -p 4 -n 5000 -no -s mpi.txt
+mpirun -n 6  ./mpi -p 6 -n 5000 -no -s mpi.txt
+mpirun -n 8  ./mpi -p 8  -n 5000 -no -s mpi.txt
+mpirun -n 16 ./mpi -p 16 -n 5000 -no -s mpi.txt
+# weak scaling runs
+mpirun -n 2  ./mpi -p 2 -n 10000 -no -s mpi.txt
+mpirun -n 4  ./mpi -p 4 -n 20000 -no -s mpi.txt
+mpirun -n 6  ./mpi -p 6 -n 30000 -no -s mpi.txt
+mpirun -n 8  ./mpi -p 8 -n 60000 -no -s mpi.txt
+mpirun -n 16 ./mpi -p 16 -n 90000 -no -s mpi.txt
+./autograder -v mpi -s mpi.txt
